@@ -1,0 +1,145 @@
+/***
+	**
+	** COLORS
+	**
+***/
+
+$megaphone:		rgb(116, 116, 236);
+$dark-gray: 	rgb(34, 34, 34);
+$violet:			rgb(116, 44, 100);
+$blue:				rgb(15, 71, 175);
+$sky:					rgb(137, 197, 227);
+$green:				rgb(7, 137, 48);
+$yellow:			rgb(252, 221, 9);
+$orange: 			rgb(235, 119, 17);
+$red:					rgb(218, 18, 26);
+$light-gray:	rgb(219, 217, 214);
+$white: 			rgb(255, 255, 255);
+
+/***
+	**
+	** BREAKPOINTS
+	**
+***/
+
+$breakpoints: (
+  'x-small'   : (min-width: 375px),  // Phone size.
+  'small'     : (min-width: 667px),  // Phone size.
+  'medium'    : (min-width: 768px),  // Tablet size.
+  'large'     : (min-width: 1024px), // Laptop and Desktop size.
+  'x-large'   : (min-width: 1262px)  // Really big desktops.
+);
+
+/***
+	**
+	** FONTS AND FONT SIZES
+	**
+***/
+
+$baskerville: 'Libre Baskerville', serif;
+$lato:				'Lato', sans-serif;
+
+$bodySize: 1.125;
+$subheaderSize: 1.25;
+$headerSize: 1.6;
+$pageTitleSize: 2.2;
+$titleSize: 4;
+
+/***
+	**
+	** REM OUTPUT WITH PX FALLBACK
+	**
+***/
+
+@mixin font-size($sizeValue: 1) {
+	font-size: ($sizeValue * 16) * 1px;
+	font-size: $sizeValue * 1rem;
+}
+
+
+
+/***
+	**
+	** FUNCTION AND MIXIN FOR COLUMN OUTPUT
+	**
+***/
+
+@function columns($columns) {
+  $flex: 100%;
+  @if $columns == 1 {
+    $flex: 6.75%;
+  } @else if $columns == 2 {
+    $flex: 15%;
+  } @else if $columns == 3 {
+    $flex: 23.25%;
+  } @else if $columns == 4 {
+    $flex: 32%;
+  } @else if $columns == 5 {
+    $flex: 39.75%;
+  } @else if $columns == 6 {
+    $flex: 49%;
+  } @else if $columns == 7 {
+    $flex: 56.25%;
+  } @else if $columns == 8 {
+    $flex: 64.5%;
+  } @else if $columns == 9 {
+    $flex: 72.75%;
+  } @else if $columns == 10 {
+    $flex: 81%;
+  } @else if $columns == 11 {
+    $flex: 89.25%;
+  } @else if $columns == 12 {
+    $flex: 100%;
+  }
+  @return $flex;
+}
+
+@mixin columns($columns, $totalColumns: 12, $gutter: 1.5rem) {
+  flex: 0 0 auto;
+  width: columns($columns);
+}
+
+// Output media queries for various breakpoints
+@mixin responsive($break-name) {
+
+  // If $break-name exists in $breakpoints
+  @if map-has-key($breakpoints, $break-name) {
+    // Print media query based on $break-name
+    @media #{inspect(map-get($breakpoints, $break-name))} {
+      @content;
+    }
+  }
+
+  // If $break-name doesn't exist in $breakpoints
+  @else {
+    @warn "No value could be retrieved from `#{$break-name}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+/***
+	**
+	** CLEARFIX
+	**
+***/
+
+@mixin clearfix() {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/***
+	**
+	** CONTENT CONTAINERS
+	**
+***/
+
+@mixin standard_content($width: 675px) {
+  padding-left: 0;
+  padding-right: 0;
+  @include responsive('medium') {
+    padding-left: calc((100% - #{$width}) / 2);
+    padding-right: calc((100% - #{$width}) / 2);
+  }
+}
