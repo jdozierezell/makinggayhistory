@@ -90,7 +90,7 @@ export default {
   overflow: hidden;
   grid-column: auto / span 12;
   @include responsive('medium') {
-    flex: 1 1 columns(3);
+    flex: 0 0 columns(3);
     margin: 0.66%;
     grid-column: auto / span 3;
     @supports(display: grid) {

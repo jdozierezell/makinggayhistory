@@ -49,7 +49,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -105,11 +105,11 @@ figure {
     text-align: center;
     transition: all 0.2s ease-in-out;
     padding: 1rem 1.5rem;
-  }
-  &:hover a {
+    &:hover {
       border: 1px solid $megaphone;
       background-color: $white;
       color: $megaphone;
+    }
   }
 }
 
